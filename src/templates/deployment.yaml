@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  access-control
+  namespace: {{.Release.Namespace}}
+  labels:
+    {{- include "access-control.labels" . | nindent 4 }}
+spec:
+  progressDeadlineSeconds: 720
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{.Values.maxSurge}}
+      maxUnavailable: {{.Values.maxUnavailable}}
+  selector:
+    matchLabels:
+      {{- include "access-control.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "access-control.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "access-control.serviceAccountName" . }}
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: access-control
+          image: {{ include "harnesscommon.names.imagename" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 200
+            timeoutSeconds: 20
+            periodSeconds: 10
+            failureThreshold: 40
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 200
+            timeoutSeconds: 20
+            periodSeconds: 10
+            failureThreshold: 40
+          resources:
+              {{- toYaml .Values.resources | nindent 12 }}
+          ports:
+          - name: http
+            containerPort: {{.Values.service.port}}
+            protocol: "TCP"
+          env:
+            - name: MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: harness-secrets
+                  key: mongodbUsername
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: harness-secrets
+                  key: mongodbPassword
+            - name: MONGO_URI
+              value: 'mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017/accesscontrol?authSource=admin'
+            - name: OFFSET_STORAGE_FILE_FILENAME
+              value: 'mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017/accesscontrol?authSource=admin'
+            - name: IDENTITY_SERVICE_SECRET
+              value: 'HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU='
+          envFrom:
+          - configMapRef:
+              name: access-control
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }} 
+      affinity:  
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - access-control
+            topologyKey: "kubernetes.io/hostname"
+      {{- with .Values.affinity }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

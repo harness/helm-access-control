@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: access-control
+  namespace: {{ .Release.Namespace }}
+data:
+  IDENTITY_SERVICE_SECRET: HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU=
+
+  DEPLOY_MODE: KUBERNETES_ONPREM
+  LOGGING_LEVEL: {{ .Values.appLogLevel | quote }}
+  EVENTS_CONFIG_USE_SENTINEL: 'true'
+  EVENTS_CONFIG_SENTINEL_MASTER_NAME: 'harness-redis'
+  EVENTS_CONFIG_REDIS_SENTINELS: 'redis://redis-sentinel-harness-announce-0.{{ .Release.Namespace  }}:26379,redis://redis-sentinel-harness-announce-1.{{ .Release.Namespace  }}:26379,redis://redis-sentinel-harness-announce-2.{{ .Release.Namespace  }}:26379'
+
+  # lockRedisConfig
+  LOCK_CONFIG_USE_SENTINEL: 'true'
+  LOCK_CONFIG_SENTINEL_MASTER_NAME: 'harness-redis'
+  LOCK_CONFIG_REDIS_SENTINELS: 'redis://redis-sentinel-harness-announce-0.{{ .Release.Namespace  }}:26379,redis://redis-sentinel-harness-announce-1.{{ .Release.Namespace  }}:26379,redis://redis-sentinel-harness-announce-2.{{ .Release.Namespace  }}:26379'
+
+  # iteratorsConfig
+  RESOURCE_GROUP_ITERATOR_ENABLED: 'true'
+  RESOURCE_GROUP_ITERATOR_INTERVAL: '3600'
+  USER_GROUP_ITERATOR_ENABLED: 'true'
+  USER_GROUP_ITERATOR_INTERVAL: '3600'
+  USER_ITERATOR_ENABLED: 'true'
+  USER_ITERATOR_INTERVAL: '3600'
+  SERVICEACCOUNT_ITERATOR_ENABLED: 'true'
+  SERVICEACCOUNT_ITERATOR_INTERVAL: '3600'
+  SUPPORTPREFERENCE_ITERATOR_ENABLED: 'true'
+  SUPPORTPREFERENCE_ITERATOR_INTERVAL: '600'
+  SCOPE_ITERATOR_ENABLED: 'true'
+  SCOPE_ITERATOR_INTERVAL: '3600'
+
+  # resourceGroupClient:
+  RESOURCE_GROUP_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/resourcegroup/api/'
+
+  # userClient:
+  USER_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+
+  # userGroupClient
+  USER_GROUP_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+
+  # serviceAccountClient
+  SERVICEACCOUNT_CLIENT_BASE_URL : '{{ .Values.global.loadbalancerURL }}/ng/api/'
+
+  #accountClient
+  ACCOUNT_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/api/'
+  FEATURE_FLAG_CLIENT_BASE_URL: '{{  .Values.global.loadbalancerURL }}/api/'
+
+  #projectClient
+  PROJECT_CLIENT_BASE_URL: '{{  .Values.global.loadbalancerURL }}/ng/api/'
+
+  #organizationClient
+  ORGANIZATION_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+
+  # aggreatorModuleConfig
+  OFFSET_FLUSH_INTERVAL_MS: '10000'
+  MONGODB_USER: admin
+  MONGODB_SSL_ENABLED: 'false'
+  AGGREGATOR_ENABLED: 'true'
+
+  # auth
+  ENABLE_AUTH: 'true'
+
+  # preference
+  ACCESS_CONTROL_PREFERENCE_ENABLED: 'true'
+
+  #for notification
+  NOTIFICATION_SLACK_WEBHOOK_URL: {{ .Values.slackWebhookURL | quote }}
+  NOTIFICATION_ENVIRONMENT: ONPREM
+
+
+  # for client
+  ENABLE_ACCESS_CONTROL: 'false'
+  ACCESS_CONTROL_SERVICE_BASE_URL: '{{ .Values.global.loadbalancerURL }}/authz/api/'
+  ENABLE_AUDIT: 'true'
+  AUDIT_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/audit/api/'
+  DISTRIBUTED_LOCK_IMPLEMENTATION: REDIS
+  GOOGLE_APPLICATION_CREDENTIALS: /opt/harness/monitoring/stackdriver.json
+  MEMORY: {{ .Values.java.memory | quote }}
