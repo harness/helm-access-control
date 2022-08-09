@@ -72,6 +72,8 @@ spec:
                 secretKeyRef:
                   name: harness-secrets
                   key: mongodbPassword
+            - name: MONGODB_HOSTS
+              value: 'mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017'
             - name: MONGO_URI
               value: 'mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017/accesscontrol?authSource=admin'
             - name: OFFSET_STORAGE_FILE_FILENAME
