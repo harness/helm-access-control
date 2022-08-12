@@ -32,26 +32,26 @@ data:
   SCOPE_ITERATOR_INTERVAL: '3600'
 
   # resourceGroupClient:
-  RESOURCE_GROUP_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/resourcegroup/api/'
+  RESOURCE_GROUP_CLIENT_BASE_URL: 'http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/'
 
   # userClient:
-  USER_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  USER_CLIENT_BASE_URL: 'http://ng-manager.{{ .Release.Namespace }}.svc.cluster.local:7090/api/'
 
   # userGroupClient
-  USER_GROUP_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  USER_GROUP_CLIENT_BASE_URL: 'http://ng-manager.{{ .Release.Namespace }}.svc.cluster.local:7090/api/'
 
   # serviceAccountClient
-  SERVICEACCOUNT_CLIENT_BASE_URL : '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  SERVICEACCOUNT_CLIENT_BASE_URL : 'http://ng-manager.{{ .Release.Namespace }}.svc.cluster.local:7090/api/'
 
   #accountClient
-  ACCOUNT_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/api/'
-  FEATURE_FLAG_CLIENT_BASE_URL: '{{  .Values.global.loadbalancerURL }}/api/'
+  ACCOUNT_CLIENT_BASE_URL: 'http://harness-manager.{{ .Release.Namespace }}.svc.cluster.local:9090/api/'
+  FEATURE_FLAG_CLIENT_BASE_URL: 'http://harness-manager.{{ .Release.Namespace }}.svc.cluster.local:9090/api/'
 
   #projectClient
-  PROJECT_CLIENT_BASE_URL: '{{  .Values.global.loadbalancerURL }}/ng/api/'
+  PROJECT_CLIENT_BASE_URL: 'http://ng-manager.{{ .Release.Namespace }}.svc.cluster.local:7090/api/'
 
   #organizationClient
-  ORGANIZATION_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  ORGANIZATION_CLIENT_BASE_URL: 'http://ng-manager.{{ .Release.Namespace }}.svc.cluster.local:7090/api/'
 
   # aggreatorModuleConfig
   OFFSET_FLUSH_INTERVAL_MS: '10000'
@@ -72,9 +72,9 @@ data:
 
   # for client
   ENABLE_ACCESS_CONTROL: 'false'
-  ACCESS_CONTROL_SERVICE_BASE_URL: '{{ .Values.global.loadbalancerURL }}/authz/api/'
+  ACCESS_CONTROL_SERVICE_BASE_URL: http://accesscontrol-service.{{ .Release.Namespace }}.svc.cluster.local:9006/api/
   ENABLE_AUDIT: 'true'
-  AUDIT_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/audit/api/'
+  AUDIT_CLIENT_BASE_URL: http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/
   DISTRIBUTED_LOCK_IMPLEMENTATION: REDIS
   GOOGLE_APPLICATION_CREDENTIALS: /opt/harness/monitoring/stackdriver.json
   MEMORY: {{ .Values.java.memory | quote }}
