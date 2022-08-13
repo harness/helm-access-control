@@ -75,11 +75,11 @@ spec:
                   name: harness-secrets
                   key: mongodbPassword
             - name: MONGODB_HOSTS
-              value: {{if .Values.global.ha }}'mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017,mongodb-replicaset-chart-1.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017,mongodb-replicaset-chart-2.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017'{{ else }}'mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017'{{ end }}
+              value: 'mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017'
             - name: MONGO_URI
-              value: {{ include "harnesscommon.database.mongo" (dict "database" "accesscontrol" "context" $) }} 
+              value: 'mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017/accesscontrol?authSource=admin'
             - name: OFFSET_STORAGE_FILE_FILENAME
-              value: {{ include "harnesscommon.database.mongo" (dict "database" "accesscontrol" "context" $) }} 
+              value: 'mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017/accesscontrol?authSource=admin'
             - name: IDENTITY_SERVICE_SECRET
               value: 'HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU='
           envFrom:
