@@ -12,7 +12,7 @@ image:
   repository: harness/accesscontrol-service-signed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "76000"
 
 java:
   memory: 512m
