@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 global:
-  loadbalancerURL: "http://test/abc"
+  loadbalancerURL: ""
   ha: false
 replicaCount: 1
 maxSurge: 1
@@ -12,7 +12,7 @@ image:
   repository: harness/accesscontrol-service-signed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "76000"
+  tag: ""
 
 java:
   memory: 512m
