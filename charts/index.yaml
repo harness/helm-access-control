@@ -3,16 +3,16 @@ entries:
   access-control:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-08-14T21:04:52.912633+05:30"
+    created: "2022-08-18T01:33:22.557434+05:30"
     dependencies:
     - name: harness-common
       repository: https://harness.github.io/helm-common/charts
       version: 0.1.1
     description: A Helm chart for Kubernetes
-    digest: 38349c949aaa4a2f4651e4f3e3b975ded1817c12476b450bf1c6c5f10a374ce8
+    digest: c01367786a6966a40a9e99342c4ba6e22049e2c8d341fdd895df612e6bbcfc92
     name: access-control
     type: application
     urls:
     - access-control-0.1.0.tgz
     version: 0.1.0
-generated: "2022-08-14T21:04:52.911003+05:30"
+generated: "2022-08-18T01:33:22.556195+05:30"
