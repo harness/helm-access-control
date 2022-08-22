@@ -2,7 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 global:
-  loadbalancerURL: "http://test/abc"
+  loadbalancerURL: ""
+  ha: false
 replicaCount: 1
 maxSurge: 1
 maxUnavailable: 0
