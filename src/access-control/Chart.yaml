@@ -28,5 +28,5 @@ dependencies:
     version: 2.x.x
     repository: https://charts.bitnami.com/bitnami
   - name: harness-common
-    version: 1.x.x 
+    version: 1.x.x
     repository: https://harness.github.io/helm-common
