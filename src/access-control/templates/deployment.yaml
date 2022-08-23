@@ -67,13 +67,13 @@ spec:
             - name: MONGODB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: harness-secrets
-                  key: mongodbUsername
+                  name: {{ .Values.mongoSecrets.userName.name }}
+                  key: {{ .Values.mongoSecrets.userName.key }}
             - name: MONGODB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: harness-secrets
-                  key: mongodbPassword
+                  name: {{ .Values.mongoSecrets.password.name }}
+                  key: {{ .Values.mongoSecrets.password.key }}
             - name: MONGODB_HOSTS
               value: {{if .Values.global.ha }}'mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017,mongodb-replicaset-chart-1.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017,mongodb-replicaset-chart-2.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017'{{ else }}'mongodb-replicaset-chart-0.mongodb-replicaset-chart.{{ .Release.Namespace }}.svc:27017'{{ end }}
             - name: MONGO_URI
