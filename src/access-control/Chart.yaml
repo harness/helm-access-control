@@ -14,7 +14,7 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-# Versions are expected to follow Semantic Versioning (https://semver.org/)
+# Versions are expected to follow Semantic Versioning (https://semver.org/p
 version: 0.2.0
 
 # This is the version number of the application being deployed. This version number should be
@@ -28,5 +28,5 @@ dependencies:
     version: 2.x.x
     repository: https://charts.bitnami.com/bitnami
   - name: harness-common
-    version: 1.x.x
+    version: 1.x.x 
     repository: https://harness.github.io/helm-common

@@ -12,7 +12,6 @@ image:
   registry: docker.io
   repository: harness/accesscontrol-service-signed
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
   tag: "76000"
   digest: ""
 
