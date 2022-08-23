@@ -27,10 +27,7 @@ spec:
       labels:
         {{- include "access-control.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+      {{- include "common.images.renderPullSecrets" (dict "images" (list .Values.image) "context" $ ) | nindent 6 }}
       serviceAccountName: {{ include "access-control.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
