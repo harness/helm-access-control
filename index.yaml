@@ -3,6 +3,23 @@ entries:
   access-control:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2022-08-24T20:21:06.654614432Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 2.x.x
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: a660347cfe4c59c7707981cd2b1af935882bddb5adca3351115ffc84efc4b60e
+    name: access-control
+    type: application
+    urls:
+    - https://github.com/harness/helm-access-control/releases/download/access-control-0.2.2/access-control-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2022-08-23T15:58:41.661904879Z"
     dependencies:
     - name: common
@@ -52,4 +69,4 @@ entries:
     urls:
     - https://github.com/harness/helm-access-control/releases/download/access-control-0.1.2/access-control-0.1.2.tgz
     version: 0.1.2
-generated: "2022-08-23T15:58:41.66191958Z"
+generated: "2022-08-24T20:21:06.654639033Z"
