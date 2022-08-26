@@ -32,7 +32,7 @@ data:
   SCOPE_ITERATOR_INTERVAL: '3600'
 
   # resourceGroupClient:
-  RESOURCE_GROUP_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/resourcegroup/api/'
+  RESOURCE_GROUP_CLIENT_BASE_URL: 'http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/'
 
   # userClient:
   USER_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
@@ -72,9 +72,9 @@ data:
 
   # for client
   ENABLE_ACCESS_CONTROL: 'false'
-  ACCESS_CONTROL_SERVICE_BASE_URL: '{{ .Values.global.loadbalancerURL }}/authz/api/'
+  ACCESS_CONTROL_SERVICE_BASE_URL: 'http://access-control.{{ .Release.Namespace }}.svc.cluster.local:9006/api/'
   ENABLE_AUDIT: 'true'
-  AUDIT_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/audit/api/'
+  AUDIT_CLIENT_BASE_URL: 'http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/'
   DISTRIBUTED_LOCK_IMPLEMENTATION: REDIS
   GOOGLE_APPLICATION_CREDENTIALS: /opt/harness/monitoring/stackdriver.json
   MEMORY: {{ .Values.java.memory | quote }}
