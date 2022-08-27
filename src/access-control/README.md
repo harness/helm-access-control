@@ -59,4 +59,3 @@ A Helm chart for Kubernetes
 | waitForInitContainer.image.registry | string | `"docker.io"` |  |
 | waitForInitContainer.image.repository | string | `"harness/helm-init-container"` |  |
 | waitForInitContainer.image.tag | string | `"latest"` |  |
-
