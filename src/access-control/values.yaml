@@ -28,8 +28,8 @@ mongoSecrets:
     name: harness-secrets
     key: mongodbUsername
   password:
-    name: harness-secrets
-    key: mongodbPassword
+    name: mongodb-replicaset-chart
+    key: mongodb-root-password
 
 java:
   memory: 512m
