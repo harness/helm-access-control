@@ -52,18 +52,23 @@ spec:
             httpGet:
               path: /api/health
               port: {{ .Values.service.port }}
-            initialDelaySeconds: 200
-            timeoutSeconds: 20
+            timeoutSeconds: 2
             periodSeconds: 10
-            failureThreshold: 40
+            failureThreshold: 5
           livenessProbe:
             httpGet:
               path: /api/health
               port: {{ .Values.service.port }}
-            initialDelaySeconds: 200
-            timeoutSeconds: 20
+            timeoutSeconds: 2
             periodSeconds: 10
-            failureThreshold: 40
+            failureThreshold: 5
+          startupProbe:
+            httpGet:
+              path: /api/health
+              port: {{ .Values.service.port }}
+            timeoutSeconds: 2
+            periodSeconds: 10
+            failureThreshold: 35
           resources:
               {{- toYaml .Values.resources | nindent 12 }}
           ports:
