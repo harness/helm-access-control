@@ -48,27 +48,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          readinessProbe:
-            httpGet:
-              path: /api/health
-              port: {{ .Values.service.port }}
-            timeoutSeconds: 2
-            periodSeconds: 10
-            failureThreshold: 5
-          livenessProbe:
-            httpGet:
-              path: /api/health
-              port: {{ .Values.service.port }}
-            timeoutSeconds: 2
-            periodSeconds: 10
-            failureThreshold: 5
-          startupProbe:
-            httpGet:
-              path: /api/health
-              port: {{ .Values.service.port }}
-            timeoutSeconds: 2
-            periodSeconds: 10
-            failureThreshold: 35
+          {{- toYaml .Values.probes | nindent 10}}
           resources:
               {{- toYaml .Values.resources | nindent 12 }}
           ports:
