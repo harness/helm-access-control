@@ -42,6 +42,12 @@ spec:
           args:
             - "pod"
             - "-lapp=mongodb-replicaset"
+        - name: wait-for-redis
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
+          imagePullPolicy: IfNotPresent
+          args:
+            - "pod"
+            - "-lapp=redis-sentinel"
       containers:
         - name: access-control
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
