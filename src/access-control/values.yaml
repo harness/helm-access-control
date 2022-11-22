@@ -65,6 +65,29 @@ securityContext:
   # runAsNonRoot: true
   # runAsUser: 1000
 
+probes:
+  readinessProbe:
+    httpGet:
+      path: /api/health
+      port: http
+    timeoutSeconds: 2
+    periodSeconds: 10
+    failureThreshold: 5
+  livenessProbe:
+    httpGet:
+      path: /api/health
+      port: http
+    timeoutSeconds: 2
+    periodSeconds: 10
+    failureThreshold: 5
+  startupProbe:
+    httpGet:
+      path: /api/health
+      port: http
+    timeoutSeconds: 2
+    periodSeconds: 10
+    failureThreshold: 35
+
 service:
   type: ClusterIP
   port: 9006
