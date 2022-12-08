@@ -35,23 +35,23 @@ data:
   RESOURCE_GROUP_CLIENT_BASE_URL: 'http://platform-service.{{ .Release.Namespace }}.svc.cluster.local:9005/api/'
 
   # userClient:
-  USER_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  USER_CLIENT_BASE_URL: 'http://ng-manager:7090/'
 
   # userGroupClient
-  USER_GROUP_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  USER_GROUP_CLIENT_BASE_URL: 'http://ng-manager:7090/'
 
   # serviceAccountClient
-  SERVICEACCOUNT_CLIENT_BASE_URL : '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  SERVICEACCOUNT_CLIENT_BASE_URL : 'http://ng-manager:7090/'
 
   #accountClient
-  ACCOUNT_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/api/'
-  FEATURE_FLAG_CLIENT_BASE_URL: '{{  .Values.global.loadbalancerURL }}/api/'
+  ACCOUNT_CLIENT_BASE_URL: 'http://harness-manager:9090/api/'
+  FEATURE_FLAG_CLIENT_BASE_URL: 'http://harness-manager:9090/api/'
 
   #projectClient
-  PROJECT_CLIENT_BASE_URL: '{{  .Values.global.loadbalancerURL }}/ng/api/'
+  PROJECT_CLIENT_BASE_URL: 'http://ng-manager:7090/'
 
   #organizationClient
-  ORGANIZATION_CLIENT_BASE_URL: '{{ .Values.global.loadbalancerURL }}/ng/api/'
+  ORGANIZATION_CLIENT_BASE_URL: 'http://ng-manager:7090/'
 
   # aggreatorModuleConfig
   OFFSET_FLUSH_INTERVAL_MS: '10000'

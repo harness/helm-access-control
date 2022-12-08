@@ -1,6 +1,6 @@
 # access-control
 
-![Version: 0.2.3](https://img.shields.io/badge/Version-0.2.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.2.10](https://img.shields.io/badge/Version-0.2.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -8,7 +8,6 @@ A Helm chart for Kubernetes
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | common | 2.x.x |
 | https://harness.github.io/helm-common | harness-common | 1.x.x |
 
 ## Values
@@ -23,8 +22,10 @@ A Helm chart for Kubernetes
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | fullnameOverride | string | `""` |  |
 | global.ha | bool | `false` |  |
+| global.imagePullSecrets | list | `[]` |  |
 | global.loadbalancerURL | string | `""` |  |
 | image.digest | string | `""` |  |
+| image.imagePullSecrets | list | `[]` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"harness/accesscontrol-service-signed"` |  |
@@ -32,8 +33,8 @@ A Helm chart for Kubernetes
 | java.memory | string | `"512m"` |  |
 | maxSurge | int | `1` |  |
 | maxUnavailable | int | `0` |  |
-| mongoSecrets.password.key | string | `"mongodbPassword"` |  |
-| mongoSecrets.password.name | string | `"harness-secrets"` |  |
+| mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
+| mongoSecrets.password.name | string | `"mongodb-replicaset-chart"` |  |
 | mongoSecrets.userName.key | string | `"mongodbUsername"` |  |
 | mongoSecrets.userName.name | string | `"harness-secrets"` |  |
 | nameOverride | string | `""` |  |
@@ -55,6 +56,7 @@ A Helm chart for Kubernetes
 | slackWebhookURL | string | `""` |  |
 | tolerations | list | `[]` |  |
 | waitForInitContainer.image.digest | string | `""` |  |
+| waitForInitContainer.image.imagePullSecrets | list | `[]` |  |
 | waitForInitContainer.image.pullPolicy | string | `"IfNotPresent"` |  |
 | waitForInitContainer.image.registry | string | `"docker.io"` |  |
 | waitForInitContainer.image.repository | string | `"harness/helm-init-container"` |  |
